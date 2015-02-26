@@ -1,0 +1,1 @@
+Java application for browsing students and courses in a GUI
