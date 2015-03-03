@@ -45,8 +45,7 @@ public class CourseRepo implements Repository<Course> {
 		
 		try {
 			while(rs.next()){
-				Course course = new Course();
-				course.setCourseTitle(rs.getString("CourseTitle"));
+				Course course = mapRepoEntryToCourse(rs);
 				courseListing.add(course);
 			}
 		} catch (SQLException e) {
@@ -55,5 +54,18 @@ public class CourseRepo implements Repository<Course> {
 		}
 		return courseListing;
 	}
+	private Course mapRepoEntryToCourse(ResultSet rs) throws SQLException {
+		Course course = new Course();
+		course.setId(Integer.parseInt(rs.getString("CourseId")));
+		course.setCourseTitle(rs.getString("CourseTitle"));
+		course.setCourseCode(rs.getString("CourseCode"));
+		return course;
+	}
+	@Override
+	public ResultSet executeQuery(String proc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -1,5 +1,6 @@
 package com.paulhayman.schoolbrowser.data;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public interface Repository<T>{
@@ -9,4 +10,5 @@ public interface Repository<T>{
 	void update(T entity);
 	void delete(T entity);
 	List<T> getAll();
+	ResultSet executeQuery(String proc);
 }

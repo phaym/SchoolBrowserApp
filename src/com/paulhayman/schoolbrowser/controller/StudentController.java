@@ -3,14 +3,11 @@ package com.paulhayman.schoolbrowser.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.paulhayman.schoolbrowser.models.Course;
 import com.paulhayman.schoolbrowser.models.Student;
 import com.paulhayman.schoolbrowser.services.StudentService;
 import com.paulhayman.schoolbrowser.services.StudentServiceImpl;
@@ -30,7 +27,7 @@ public class StudentController  {
 		
 		List<Student> studentListing = studentService.getAllStudents();
 		
-		ModelAndView model = new ModelAndView("StudentListing");
+		ModelAndView model = new ModelAndView();
 		model.addObject("studentListing", studentListing);
 		return model;
 	}
@@ -38,7 +35,7 @@ public class StudentController  {
 	@RequestMapping(value="/AddStudent", method=RequestMethod.GET)
 	public ModelAndView studentForm(){
 		
-		ModelAndView model = new ModelAndView("AddStudent");
+		ModelAndView model = new ModelAndView();
 		model.addObject("student", new Student());
 		return model;
 	}
@@ -50,15 +47,19 @@ public class StudentController  {
 		return new ModelAndView("redirect:/StudentListing");
 	}
 	
-	
-	@ModelAttribute
-	public void addAttributeToAllModels(Model model){
-	
-	}
-	
-	@InitBinder
-	public void customDataBinder(WebDataBinder binder){
+	@RequestMapping(value="/ViewCourses", method=RequestMethod.GET)
+	public List<Course> studentAssignCourse(int id){
 		
+		List<Course> courseListing = studentService.getCoursesForStudent(id);
+		Course test = new Course();
+		test.setCourseCode("1001");
+		test.setCourseTitle("what what");
+		courseListing.add(test);
+
+		return courseListing;
 	}
+	
+	
+	
 
 }

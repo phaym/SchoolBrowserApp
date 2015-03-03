@@ -2,9 +2,12 @@ package com.paulhayman.schoolbrowser.models;
 
 public abstract class BaseEntity {
 
-	private long id;
+	private int id;
 	
-	public long getID(){
+	public int getId(){
 		return id;
 	};
+	public void setId(int id){
+		this.id = id;
+	}
 }

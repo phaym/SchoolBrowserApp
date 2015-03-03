@@ -26,7 +26,7 @@ public class CourseController  {
 		
 		List<Course> courseListing = courseService.getAllCourses();
 		
-		ModelAndView model = new ModelAndView("CourseListing");
+		ModelAndView model = new ModelAndView();
 		model.addObject("courseListing", courseListing);
 		return model;
 	}
@@ -34,7 +34,7 @@ public class CourseController  {
 	@RequestMapping(value="/AddCourse", method=RequestMethod.GET)
 	public ModelAndView courseForm(){
 		
-		ModelAndView model = new ModelAndView("AddCourse");
+		ModelAndView model = new ModelAndView();
 		model.addObject("course", new Course());
 		return model;
 	}
