@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.paulhayman.schoolbrowser.models.Course;
+import com.paulhayman.schoolbrowser.models.Student;
 import com.paulhayman.schoolbrowser.services.CourseService;
 import com.paulhayman.schoolbrowser.services.CourseServiceImpl;
 
@@ -44,6 +47,15 @@ public class CourseController  {
 		
 		courseService.addCourse(course);
 		return new ModelAndView("redirect:/CourseListing");
+	}
+	
+	@RequestMapping(value="/StudentsInCourse", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public String studentAssignCourse(int id){
+		
+		List<Student> studentListing = courseService.getStudentsInCourse(id);
+		Gson gson = new Gson();
+		return gson.toJson(studentListing);
 	}
 
 }

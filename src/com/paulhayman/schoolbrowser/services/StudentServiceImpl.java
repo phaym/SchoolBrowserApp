@@ -32,14 +32,16 @@ public class StudentServiceImpl implements StudentService{
 	public List<Course> getCoursesForStudent(int id) {	
 		List<Course> coursesForStudent = new ArrayList<Course>();
 	
-		ResultSet rs = studentRepo.executeQuery("SELECT Student_Id, CourseId, CourseTitle, "
-				+ "CourseCode FROM CourseForStudent, Courses WHERE Student_Id =" + id);
+		ResultSet rs = studentRepo.executeQuery("SELECT Student_Id, Course_Id CourseId, CourseTitle, "
+				+ "CourseCode FROM CourseForStudent, Courses WHERE Course_Id = CourseId AND Student_Id =" + id);
 		try {
-			while(rs.next()){
-				Course studentCourse = new Course();
-				studentCourse.setCourseCode(rs.getString("CourseId"));
-				studentCourse.setCourseTitle(rs.getString("CourseTitle"));
-				coursesForStudent.add(studentCourse);
+			if(rs != null){
+				while(rs.next()){
+					Course studentCourse = new Course();
+					studentCourse.setCourseCode(rs.getString("CourseId"));
+					studentCourse.setCourseTitle(rs.getString("CourseTitle"));
+					coursesForStudent.add(studentCourse);
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

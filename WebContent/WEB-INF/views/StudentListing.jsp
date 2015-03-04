@@ -12,35 +12,49 @@
 	<title>Student Listing</title>
 </head>
 <body>
-	<h3>Student Listing</h3>
-	<div class = "container">
-		<div class = "listingDetails left">
-			<table id = "students">
-				<tr>
-					<th>StudentID</th><th>First Name</th><th>Last Name</th>
-				</tr>
-				<c:forEach items="${studentListing}" var="student">
+	<div id="wrap">
+	   <h1>Paymentus Web App : Paul Hayman</h1>
+	   
+	   <ul id="nav">
+	      <li><a href="#">Home</a></li>
+	      <li><a href="<c:url value="/StudentListing"/>">Students</a></li>
+	      <li><a href="<c:url value="/CourseListing"/>">Courses</a></li>
+	      <li><a href="<c:url value="/TreeProcessor"/>">Q2: Tree Processing</a></li>
+	   </ul>
+	   
+	   <div id="content">
+	      <p>Click "View Courses" for a student to view in right pane courses a student is enrolled in.</p>
+ 		</div>
+	
+		<div class = "container">
+			<div class = "listingDetails left">
+				<table id = "students">
 					<tr>
-						<td><c:out value="${student.id}"/></td>
-						<td><c:out value="${student.firstName}"/></td>
-						<td><c:out value="${student.lastName}"/></td>
-						<td>					
-				           <input type="button" value="View Courses" onclick="getCoursesForStudent(${student.id });"/>				      
-				        </td>
+						<th>StudentID</th><th>First Name</th><th>Last Name</th>
 					</tr>
-				</c:forEach>
-			</table>
-		</div>
-		<div class = "listingDetails right">
-			<table id = "coursesForStudents">
-			<thead>
-				<tr>
-					<th>Course Title</th><th>Course Code</th>
-				</tr>
-			</thead>
-			<tbody></tbody>
-			</table>
-		</div>
+					<c:forEach items="${studentListing}" var="student">
+						<tr>
+							<td><c:out value="${student.id}"/></td>
+							<td><c:out value="${student.firstName}"/></td>
+							<td><c:out value="${student.lastName}"/></td>
+							<td>					
+					           <input type="button" value="View Courses" onclick="getCoursesForStudent(${student.id });"/>				      
+					        </td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<div class = "listingDetails right">
+				<table id = "coursesForStudents">
+				<thead>
+					<tr>
+						<th>Course Title</th><th>Course Code</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+				</table>
+			</div>
+		</div>		  
 	</div>
 </body>
 </html>

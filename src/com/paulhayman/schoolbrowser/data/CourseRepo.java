@@ -63,8 +63,9 @@ public class CourseRepo implements Repository<Course> {
 	}
 	@Override
 	public ResultSet executeQuery(String proc) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ResultSet rs = connection.executeQuery(proc);
+		return rs;
 	}
 
 

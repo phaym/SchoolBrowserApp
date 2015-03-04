@@ -4,7 +4,7 @@ function getCoursesForStudent(studentId) {
    
 	$.ajax({
         type: "GET",
-        url: "ViewCourses",
+        url: "CoursesForStudent",
         data: {"id": studentId },
         dataType: 'json',
         success: function(data){

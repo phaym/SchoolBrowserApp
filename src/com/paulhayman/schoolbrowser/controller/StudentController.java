@@ -49,9 +49,9 @@ public class StudentController  {
 		return new ModelAndView("redirect:/StudentListing");
 	}
 	
-	@RequestMapping(value="/ViewCourses", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value="/CoursesForStudent", method=RequestMethod.GET, produces="application/json")
 	@ResponseBody
-	public String studentAssignCourse(int id){
+	public String coursesForStudent(int id){
 		
 		List<Course> courseListing = studentService.getCoursesForStudent(id);
 		Gson gson = new Gson();

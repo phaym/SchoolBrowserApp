@@ -12,6 +12,7 @@ public class StudentRepo implements Repository<Student>{
 	private DBConnection connection;
 	
 	public StudentRepo(){
+		
 		connection = new SQLConnectionImpl();
 	}
 	
@@ -23,11 +24,13 @@ public class StudentRepo implements Repository<Student>{
 
 	@Override
 	public void insert(Student entity) {
+		
 		String insertQuery = mapStudentToInsertStr(entity);
 		connection.executeUpdate(insertQuery);
 	}
 
 	private String mapStudentToInsertStr(Student entity) {
+		
 		String query = "INSERT INTO Students (FirstName, LastName) Values";
 		query = query + "('"
 						+entity.getFirstName()+ "','" 
@@ -50,13 +53,15 @@ public class StudentRepo implements Repository<Student>{
 
 	@Override
 	public List<Student> getAll() {
+		
 		List<Student> studentListing = new ArrayList<Student>();
-
 		ResultSet rs = connection.executeQuery("Select * FROM Students");
 		try {
-			while(rs.next()){
-				Student student = mapRepoEntryToStudent(rs);
-				studentListing.add(student);
+			if(rs != null){
+				while(rs.next()){
+					Student student = mapRepoEntryToStudent(rs);
+					studentListing.add(student);
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -66,6 +71,7 @@ public class StudentRepo implements Repository<Student>{
 	}
 
 	private Student mapRepoEntryToStudent(ResultSet rs) throws SQLException{
+		
 		Student student = new Student();
 		student.setId(Integer.parseInt(rs.getString("StudentId")));
 		student.setFirstName(rs.getString("FirstName"));
@@ -75,7 +81,7 @@ public class StudentRepo implements Repository<Student>{
 
 	@Override
 	public ResultSet executeQuery(String proc) {
-		
+
 		ResultSet rs = connection.executeQuery(proc);
 		return rs;
 	}
