@@ -31,11 +31,10 @@ public class StudentRepo implements Repository<Student>{
 
 	private String mapStudentToInsertStr(Student entity) {
 		
-		String query = "INSERT INTO Students (FirstName, LastName) Values";
-		query = query + "('"
+		String query = "INSERT INTO Students (FirstName, LastName) Values ('"
 						+entity.getFirstName()+ "','" 
-						+entity.getLastName()+ 
-						"')";
+						+entity.getLastName()
+						+"')";
 		return query;
 	}
 

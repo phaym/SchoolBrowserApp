@@ -22,9 +22,19 @@ public class CourseRepo implements Repository<Course> {
 
 	@Override
 	public void insert(Course entity) {
-		connection.executeUpdate("INSERT INTO Courses (CourseTitle) Values('" + entity.getCourseTitle() + "')");
+		
+		String insertQuery = mapStudentToInsertStr(entity);
+		connection.executeUpdate(insertQuery);
 	}
 
+	private String mapStudentToInsertStr(Course entity) {
+		
+		String query = "INSERT INTO Courses (CourseTitle, CourseCode) Values('" 
+				+ entity.getCourseTitle() +"','"
+				+ entity.getCourseCode()  
+				+"')";
+		return query;
+	}
 	@Override
 	public void update(Course entity) {
 		// TODO Auto-generated method stub

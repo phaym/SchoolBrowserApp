@@ -28,7 +28,7 @@
 	
 		<div class = "container">
 			<div class = "listingDetails left">
-			<input type="button" value="Add Student" onclick="location.href='<c:url value="/AddStudent"/>'"/>
+			<input type="button" value="Add Student" onclick="location.href='<c:url value="/AddStudent"/>'"/>	
 				<table id = "students">
 					<tr>
 						<th>StudentID</th><th>First Name</th><th>Last Name</th>
@@ -39,14 +39,14 @@
 							<td><c:out value="${student.firstName}"/></td>
 							<td><c:out value="${student.lastName}"/></td>
 							<td>					
-					           <input type="button" value="View Courses" onclick="getCoursesForStudent(${student.id });"/>				      
+					           <input type="button" value="View Courses" onclick="getCoursesForStudent(${student.id});"/>				      
 					        </td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 			<div class = "listingDetails right">
-			<input type="button" value="Enroll New Course" onclick="location.href='<c:url value=""/>'"/>
+				<p>Student Info For: </p><div id ="studentName"></div>
 				<table id = "coursesForStudents">
 				<thead>
 					<tr>

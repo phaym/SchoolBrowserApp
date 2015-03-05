@@ -26,6 +26,7 @@
  		</div>
 		<div class = "container">
 			<div class = "listingDetails left">
+				<input type="button" value="Add Course" onclick="location.href='<c:url value="/AddCourse"/>'"/>	
 				<table id = "courses">
 				<thead>
 					<tr>
