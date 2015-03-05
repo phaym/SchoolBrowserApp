@@ -28,6 +28,7 @@
 	
 		<div class = "container">
 			<div class = "listingDetails left">
+			<input type="button" value="Add Student" onclick="location.href='<c:url value="/AddStudent"/>'"/>
 				<table id = "students">
 					<tr>
 						<th>StudentID</th><th>First Name</th><th>Last Name</th>
@@ -45,6 +46,7 @@
 				</table>
 			</div>
 			<div class = "listingDetails right">
+			<input type="button" value="Enroll New Course" onclick="location.href='<c:url value=""/>'"/>
 				<table id = "coursesForStudents">
 				<thead>
 					<tr>

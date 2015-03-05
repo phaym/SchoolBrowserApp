@@ -53,15 +53,25 @@ h1 {
 
 .container{
 	position:relative;
-	width:90%;
-	margin:auto;
+	margin-left:50px;
+	margin-right:50px;
+	max-width:1000px;
 }
 
 .listingDetails{
 	width : 45%;
 	padding: 10px;
+	max-width:500px;
+}
+
+.listingDetails table{
+	width:100%;
 	border-style: solid;
-	border-width:4px;
+	border-width:1px;
+}
+
+.listingDetails tr{
+	text-align:center;
 }
 .listingDetials.left{
 	float:left;

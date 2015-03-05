@@ -16,7 +16,7 @@ public class TreeServiceImpl implements TreeService{
 		
 		treeRoot = new Node();
 		buildTree(treeStr);
-		return findLevelsForValue(value);
+		return listLevelsForValue(value);
 	}
 
 	private void buildTree(String treeStr) {
@@ -25,34 +25,49 @@ public class TreeServiceImpl implements TreeService{
 		treeQueue.add(treeRoot);
 		
 		for(int i = 0; i < treeStr.length(); i++){		
+			Node currentNode = treeQueue.remove();
 			char data = treeStr.charAt(i);
 			if(data != ','){
-				Node currentNode = treeQueue.remove();
 				currentNode.setData(data);
 				currentNode.setLeftChild(new Node());
 				currentNode.setRightChild(new Node());
 				treeQueue.add(currentNode.getLeftChild());
 				treeQueue.add(currentNode.getRightChild());
+				i++; 			//if char is node value skip comma
 			}
 		}
 	}
 	
-	private List<Integer> findLevelsForValue(int value) {
+	private List<Integer> listLevelsForValue(int value) {
 		
 		List<Integer> levels = new ArrayList<Integer>();
 		Queue<Node> treeQueue = new LinkedList<Node>();
 		treeQueue.add(treeRoot);
-		int nodeCount = 0;
-		while(!treeQueue.isEmpty()){		
+		
+		while(!treeQueue.isEmpty()){
+			
 			Node currentNode = treeQueue.remove();
-			nodeCount++;
-			if(value == Character.getNumericValue(currentNode.getData())){
-				//Find level of this node
-			}
-			treeQueue.add(currentNode.getLeftChild());
-			treeQueue.add(currentNode.getRightChild());
+			Character data = currentNode.getData();
+			if(data != null){
+				if(value == Character.getNumericValue(data)){
+					levels.add(getNodeLevel(currentNode));
+				}
+				treeQueue.add(currentNode.getLeftChild());
+				treeQueue.add(currentNode.getRightChild());
+			}		
 		}
 		return levels;
+	}
+
+	private int getNodeLevel(Node node) {
+		
+		int level = 1;
+		Node currentNode = node;
+		while(currentNode != null && currentNode.getParent() != null){
+			level++;
+			currentNode = currentNode.getParent();
+		}
+		return level;
 	}
 	
 

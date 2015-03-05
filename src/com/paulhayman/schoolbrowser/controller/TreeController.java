@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.paulhayman.schoolbrowser.services.TreeService;
 import com.paulhayman.schoolbrowser.services.TreeServiceImpl;
 
@@ -21,16 +24,17 @@ public class TreeController {
 	
 	@RequestMapping("/TreeProcessor")
 	public ModelAndView displayTreeForm(){
-		
-		int value = 5;
-		String tree = "4,5,9,8,6,,5,2,7,,,,8";
-		List<Integer> result = treeService.getLevelsForValue(tree, value);
-		System.out.print("Levels: ");
-		for(Integer r: result){
-			System.out.print(r + ", ");
-		}
-		
+			
 		ModelAndView model = new ModelAndView();
 		return model;
+	}
+	
+	@RequestMapping(value="/LevelsForValue", method=RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public String getLevelsForValue(String tree, int nodeValue){
+		
+		List<Integer> levels = treeService.getLevelsForValue(tree, nodeValue);
+		Gson gson = new Gson();
+		return gson.toJson(levels);
 	}
 }

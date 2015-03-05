@@ -4,12 +4,15 @@ public class Node {
 
 	private Character data;
 	private Node parent;
-	private Node[] children;
+	private Node[] children = new Node[2];
 	
 	public Node(){
-		this.children = new Node[2];
 	}
-
+	
+	public Node(Node parent){
+		this.parent = parent;
+	}
+	
 	public Character getData() {
 		return data;
 	}
@@ -35,10 +38,12 @@ public class Node {
 	}
 	
 	public void setLeftChild(Node left){
+		left.setParent(this);
 		children[0] = left;
 	}
 	
 	public void setRightChild(Node right){
+		right.setParent(this);
 		children[1] = right;
 	}
 }
