@@ -3,6 +3,7 @@ package com.paulhayman.schoolbrowser.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.paulhayman.schoolbrowser.models.Course;
 import com.paulhayman.schoolbrowser.models.Student;
+import com.paulhayman.schoolbrowser.services.CourseService;
+import com.paulhayman.schoolbrowser.services.CourseServiceImpl;
 import com.paulhayman.schoolbrowser.services.StudentService;
 import com.paulhayman.schoolbrowser.services.StudentServiceImpl;
 
@@ -19,9 +22,11 @@ import com.paulhayman.schoolbrowser.services.StudentServiceImpl;
 public class StudentController  {
 	
 	private StudentService studentService;
+	private CourseService courseService;
 	
 	public StudentController(){
 		studentService = new StudentServiceImpl();
+		courseService = new CourseServiceImpl();
 	}
 
 	@RequestMapping("/StudentListing")
@@ -30,8 +35,29 @@ public class StudentController  {
 		List<Student> studentListing = studentService.getAllStudents();
 		
 		ModelAndView model = new ModelAndView();
+		model.addObject("infoStudent", new Student());
 		model.addObject("studentListing", studentListing);
 		return model;
+	}
+	
+	@RequestMapping(value="/StudentInfo", method=RequestMethod.POST)
+	public ModelAndView displayStudentInfo(@ModelAttribute("infoStudent") Student infoStudent){
+		
+		List<Course> coursesForStudent = studentService.getCoursesForStudent(infoStudent.getId());
+		List<Course> allCourses = courseService.getAllCourses();
+		ModelAndView model = new ModelAndView();
+		model.addObject("student", infoStudent);
+		model.addObject("coursesForStudent", coursesForStudent);
+		model.addObject("allCourses", allCourses);
+		return model;
+	}
+	
+	@RequestMapping(value="/UpdateStudent", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public ModelAndView updateStudent(Student newStudent){
+		
+		studentService.updateStudentInfo(newStudent);
+		return new ModelAndView("redirect:/StudentListing");
 	}
 	
 	@RequestMapping(value="/AddStudent", method=RequestMethod.GET)
@@ -58,7 +84,13 @@ public class StudentController  {
 		return gson.toJson(courseListing);
 	}
 	
-	
-	
+	@RequestMapping(value="/EnrollStudent", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public String enrollStudent(int studentId, int courseId){
+		
+		String response = studentService.enrollStudent(studentId, courseId);
+		Gson gson = new Gson();
+		return gson.toJson(response);
+	}
 
 }

@@ -26,3 +26,22 @@ function getCoursesForStudent(studentId) {
         }
     });
 }
+
+function enrollStudent(studentId, courseId){
+
+	$.ajax({
+        type: "POST",
+        url: "EnrollStudent",
+        data: {"studentId": studentId, "courseId" : courseId },
+        dataType: 'json',
+        success: function(data){
+    		
+        	if(data == "Success"){
+        		getCoursesForStudent(studentId);
+        	}
+        	else{
+        		alert(data);
+        	}
+        }
+    });
+}

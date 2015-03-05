@@ -40,8 +40,11 @@ public class StudentRepo implements Repository<Student>{
 
 	@Override
 	public void update(Student entity) {
-		// TODO Auto-generated method stub
 		
+		String query = "UPDATE Students SET FirstName='" + entity.getFirstName() 
+						+ "', LastName='" +  entity.getLastName() 
+						+  "' WHERE StudentId ='" + entity.getId()+ "'";
+		connection.executeUpdate(query);
 	}
 
 	@Override
@@ -83,6 +86,12 @@ public class StudentRepo implements Repository<Student>{
 
 		ResultSet rs = connection.executeQuery(proc);
 		return rs;
+	}
+
+	@Override
+	public void executeUpdate(String proc) {
+	
+		connection.executeUpdate(proc);
 	}
 
 

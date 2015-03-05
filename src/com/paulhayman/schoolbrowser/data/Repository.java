@@ -11,4 +11,5 @@ public interface Repository<T>{
 	void delete(T entity);
 	List<T> getAll();
 	ResultSet executeQuery(String proc);
+	void executeUpdate(String proc);
 }

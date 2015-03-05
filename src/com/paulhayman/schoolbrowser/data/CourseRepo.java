@@ -77,6 +77,11 @@ public class CourseRepo implements Repository<Course> {
 		ResultSet rs = connection.executeQuery(proc);
 		return rs;
 	}
+	@Override
+	public void executeUpdate(String proc) {
+		
+		connection.executeUpdate(proc);
+	}
 
 
 }

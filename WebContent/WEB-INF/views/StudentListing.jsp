@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,38 +24,28 @@
 	   </ul>
 	   
 	   <div id="content">
-	      <p>Click "View Courses" for a student to view in right pane courses a student is enrolled in.</p>
  		</div>
 	
 		<div class = "container">
 			<div class = "listingDetails left">
-			<input type="button" value="Add Student" onclick="location.href='<c:url value="/AddStudent"/>'"/>	
-				<table id = "students">
-					<tr>
-						<th>StudentID</th><th>First Name</th><th>Last Name</th>
-					</tr>
-					<c:forEach items="${studentListing}" var="student">
+				<input type="button" value="Add Student" onclick="location.href='<c:url value="/AddStudent"/>'"/>
+				
+					<table id = "students">
 						<tr>
-							<td><c:out value="${student.id}"/></td>
-							<td><c:out value="${student.firstName}"/></td>
-							<td><c:out value="${student.lastName}"/></td>
-							<td>					
-					           <input type="button" value="View Courses" onclick="getCoursesForStudent(${student.id});"/>				      
-					        </td>
+							<th>StudentID</th><th>First Name</th><th>Last Name</th>
 						</tr>
-					</c:forEach>
-				</table>
-			</div>
-			<div class = "listingDetails right">
-				<p>Student Info For: </p><div id ="studentName"></div>
-				<table id = "coursesForStudents">
-				<thead>
-					<tr>
-						<th>Course Title</th><th>Course Code</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-				</table>
+						
+						<c:forEach items="${studentListing}" var="student">
+							<form:form method="POST" action="StudentInfo" modelAttribute="infoStudent">
+							<tr>
+								<td><form:input type ="hidden" path="id" value="${student.id }"/><c:out value="${student.id}"/></td>
+								<td><form:input type ="hidden" path="firstName" value="${student.firstName }"/><c:out value="${student.firstName}"/></td>
+								<td><form:input type ="hidden" path="lastName" value="${student.lastName }"/><c:out value="${student.lastName}"/></td>					
+						        <td><input  type="submit" value="Enroll / Edit Student"/></td>				      
+							</tr>	
+							</form:form>
+						</c:forEach>
+					</table>
 			</div>
 		</div>		  
 	</div>
