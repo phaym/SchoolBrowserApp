@@ -27,6 +27,16 @@ private Repository<Course> courseRepo;
 	public void addCourse(Course course) {		
 		courseRepo.insert(course);		
 	}
+	
+	@Override
+	public void updateCourseInfo(Course newCourse) {	
+		courseRepo.update(newCourse);
+	}
+	
+	@Override
+	public void deleteCourse(Course course) {
+		courseRepo.delete(course);
+	}
 
 	@Override
 	public List<Student> getStudentsInCourse(int id) {
@@ -50,5 +60,6 @@ private Repository<Course> courseRepo;
 		}
 		return studentsInCourse;
 	}
+
 
 }

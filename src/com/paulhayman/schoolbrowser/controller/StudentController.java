@@ -3,7 +3,6 @@ package com.paulhayman.schoolbrowser.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,7 +40,7 @@ public class StudentController  {
 	}
 	
 	@RequestMapping(value="/StudentInfo", method=RequestMethod.POST)
-	public ModelAndView displayStudentInfo(@ModelAttribute("infoStudent") Student infoStudent){
+	public ModelAndView displayStudentInfo(Student infoStudent){
 		
 		List<Course> coursesForStudent = studentService.getCoursesForStudent(infoStudent.getId());
 		List<Course> allCourses = courseService.getAllCourses();
@@ -51,12 +50,20 @@ public class StudentController  {
 		model.addObject("allCourses", allCourses);
 		return model;
 	}
-	
-	@RequestMapping(value="/UpdateStudent", method=RequestMethod.POST, produces="application/json")
+
+	@RequestMapping(params = "update",value="/UpdateStudent", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView updateStudent(Student newStudent){
 		
 		studentService.updateStudentInfo(newStudent);
+		return new ModelAndView("redirect:/StudentListing");
+	}
+	
+	@RequestMapping(params = "delete",value="/UpdateStudent", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView deleteStudent(Student student){
+		
+		studentService.deleteStudent(student);
 		return new ModelAndView("redirect:/StudentListing");
 	}
 	
@@ -91,6 +98,15 @@ public class StudentController  {
 		String response = studentService.enrollStudent(studentId, courseId);
 		Gson gson = new Gson();
 		return gson.toJson(response);
+	}
+	
+	@RequestMapping(value="/WithdrawStudent", method=RequestMethod.POST, produces="application/json")
+	@ResponseBody
+	public String withdrawStudent(int studentId, int courseId){
+		
+		studentService.withdrawStudent(studentId, courseId);
+		Gson gson = new Gson();
+		return gson.toJson("Success");
 	}
 
 }

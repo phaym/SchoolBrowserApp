@@ -34,6 +34,11 @@ public class StudentServiceImpl implements StudentService{
 	}
 	
 	@Override
+	public void deleteStudent(Student student) {
+		studentRepo.delete(student);
+	}
+	
+	@Override
 	public List<Course> getCoursesForStudent(int id) {	
 		List<Course> coursesForStudent = new ArrayList<Course>();
 	
@@ -45,6 +50,7 @@ public class StudentServiceImpl implements StudentService{
 					Course studentCourse = new Course();
 					studentCourse.setCourseCode(rs.getString("CourseCode"));
 					studentCourse.setCourseTitle(rs.getString("CourseTitle"));
+					studentCourse.setId(rs.getInt("CourseId"));
 					coursesForStudent.add(studentCourse);
 				}
 			}
@@ -80,6 +86,14 @@ public class StudentServiceImpl implements StudentService{
 		}
 		return response;					
 		
+	}
+
+	@Override
+	public void withdrawStudent(int studentId, int courseId) {
+		
+		String query = "DELETE FROM CourseForStudent WHERE Course_Id=" + courseId + " AND Student_Id =" + studentId;
+		
+		studentRepo.executeUpdate(query);
 	}
 
 

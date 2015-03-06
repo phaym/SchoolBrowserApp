@@ -37,14 +37,17 @@ public class CourseRepo implements Repository<Course> {
 	}
 	@Override
 	public void update(Course entity) {
-		// TODO Auto-generated method stub
-
+		String query = "UPDATE Courses SET CourseTitle='" + entity.getCourseTitle() 
+				+ "', CourseCode='" +  entity.getCourseCode() 
+				+  "' WHERE CourseId ='" + entity.getId()+ "'";
+		connection.executeUpdate(query);
 	}
 
 	@Override
 	public void delete(Course entity) {
-		// TODO Auto-generated method stub
-
+		
+		String query = "DELETE FROM Courses WHERE CourseId=" + entity.getId();
+		connection.executeUpdate(query);
 	}
 
 	@Override

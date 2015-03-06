@@ -12,4 +12,6 @@ public interface StudentService {
 	public List<Course> getCoursesForStudent(int id);
 	public String enrollStudent(int studentId, int courseId);
 	public void updateStudentInfo(Student newStudent);
+	public void deleteStudent(Student student);
+	public void withdrawStudent(int studentId, int courseId);
 }

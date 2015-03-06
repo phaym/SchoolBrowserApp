@@ -49,8 +49,9 @@ public class StudentRepo implements Repository<Student>{
 
 	@Override
 	public void delete(Student entity) {
-		// TODO Auto-generated method stub
 		
+		String query = "DELETE FROM Students WHERE StudentId=" + entity.getId();
+		connection.executeUpdate(query);
 	}
 
 	@Override

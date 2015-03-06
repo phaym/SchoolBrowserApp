@@ -47,6 +47,7 @@ h1 {
  }
  #content {
      padding: 0 50px 0; 
+     margin-top:50px;
 }
 
 /*styling for student and courses blocks*/
@@ -55,13 +56,15 @@ h1 {
 	position:relative;
 	margin-left:50px;
 	margin-right:50px;
-	max-width:1000px;
+	max-width:1400px;
+	min-width:800px;
 }
 
 .listingDetails{
 	width : 45%;
 	padding: 10px;
-	max-width:500px;
+	max-width:700px;
+	min-width:400px;
 }
 
 .listingDetails table{
@@ -80,4 +83,7 @@ h1 {
 	position:absolute;
 	right:0;
 	top:0;
+}
+td.editbutton{
+	white-space:nowrap;
 }

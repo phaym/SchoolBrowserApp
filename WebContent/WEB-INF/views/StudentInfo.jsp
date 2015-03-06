@@ -39,7 +39,8 @@
 	                </tr>
 	                <tr>
 	               		<td><form:input type ="hidden" path="id" value="${student.id }"/></td>
-	                    <td><input type="submit" value="Update Info"/></td>
+	                    <td class="editbutton"><input type="submit" name="update" value="Update Info"/>
+	                     	<input type="submit" name="delete" value="Delete"/></td>
 	                </tr>
 	            </table>
 	        </form:form>
@@ -55,6 +56,9 @@
 						<tr>
 							<td><c:out value="${course.courseTitle}"/></td>
 							<td><c:out value="${course.courseCode}" /></td>
+							<td>					
+				           		<input type="button" value="Withdraw Course" onclick="withdrawFromCourse('${student.id}','${course.id }');"/>				      
+				       		 </td>	
 						</tr>
 					</c:forEach>
 				</table>

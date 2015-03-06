@@ -10,4 +10,6 @@ public interface CourseService {
 	public List<Course> getAllCourses();
 	public void addCourse(Course course);
 	public List<Student> getStudentsInCourse(int id);
+	public void updateCourseInfo(Course newCourse);
+	public void deleteCourse(Course course);
 }

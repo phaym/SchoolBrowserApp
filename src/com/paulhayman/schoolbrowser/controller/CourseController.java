@@ -31,7 +31,34 @@ public class CourseController  {
 		
 		ModelAndView model = new ModelAndView();
 		model.addObject("courseListing", courseListing);
+		model.addObject("courseInfo", new Course());
 		return model;
+	}
+	
+	@RequestMapping(value="/CourseInfo", method=RequestMethod.POST)
+	public ModelAndView displayCourseInfo(Course courseInfo){
+		
+		List<Student> studentsInCourse = courseService.getStudentsInCourse(courseInfo.getId());
+		ModelAndView model = new ModelAndView();
+		model.addObject("course", courseInfo);
+		model.addObject("studentsInCourse", studentsInCourse);
+		return model;
+	}
+	
+	@RequestMapping(params = "update",value="/UpdateCourse", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView updateCourse(Course newCourse){
+		
+		courseService.updateCourseInfo(newCourse);
+		return new ModelAndView("redirect:/CourseListing");
+	}
+	
+	@RequestMapping(params = "delete",value="/UpdateCourse", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView deleteCourse(Course course){
+		
+		courseService.deleteCourse(course);
+		return new ModelAndView("redirect:/CourseListing");
 	}
 	
 	@RequestMapping(value="/AddCourse", method=RequestMethod.GET)
