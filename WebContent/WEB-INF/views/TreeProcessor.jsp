@@ -26,14 +26,12 @@
 	      <ul>
 			 <li>Input should be a single integer value.</li>
 		</ul>
-		 Tree
+		 	Tree
 			<ul>
 				<li>Input should be a comma-delimited string that represents tree node values in a binary tree.</li> 
 				<li>Input should be in a breadth-first, left-to-right format.</li>
 				<li>Example input: 4,5,9,8,6,,5,2,7,,,,8</li>
-			</ul
- 		</div>
- 		<br>
+			</ul>
 		<table id="treeForm">
 			<tr>
 				<td>Tree String</td><td><input id="treeString"></input></td>
@@ -48,6 +46,7 @@
 				<td><input type="button" value="Submit Input" onclick="processTree();"/></td>
 			</tr>
 		</table>
+		</div>
 	</div>
 </body>
 </html>
