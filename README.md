@@ -11,18 +11,19 @@ Go to link http://localhost/SchoolBrowserApp/StudentListing to begin.
 
 A page that determines the level(s) of a binary tree at which a given value exists.
 
-Take 2 inputs:
-**Value To Check**
-*Input should be a single integer value.
-**Tree**
-*Input should be a comma-delimited string that represents tree node values in a binary tree.
-*Input should be in a breadth-first, left-to-right format.
+Take 2 inputs:  
+**Value To Check**  
+* Input should be a single integer value.  
+
+**Tree**  
+* Input should be a comma-delimited string that represents tree node values in a binary tree.  
+* Input should be in a breadth-first, left-to-right format.
 
 For example, the input: 4,5,9,8,6,,5,2,7,,,,8
 
 Would result in this tree:
 
-         Level 1                        4
+        Level 1                        4
 
                                     /      \
 
@@ -32,9 +33,9 @@ Would result in this tree:
 
         Level 3             8       6            5
 
-                         /  \                        \
+                          /  \                      \
 
-         Level 4        2      7                         8
+        Level 4         2      7                      8
          
 For the tree example listed above, a value of “5” for “Value To Check”
 
